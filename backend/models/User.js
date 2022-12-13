@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
       minlength: [6, "Password must be at least 6 characters"],
       select: false,
     },
-  
+  // ye humne reference bnya h to hum post jo ki is user k usko idhr la skte ha
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

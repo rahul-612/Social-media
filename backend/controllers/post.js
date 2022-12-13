@@ -10,8 +10,6 @@ exports.createPost = async (req, res) => {
       const newPostData = {
         caption: req.body.caption,
         image: {
-            public_id: "req.body.public_id",
-          url: "req.body.url",
           public_id: myCloud.public_id,
           url: myCloud.secure_url,
         },
@@ -134,7 +132,8 @@ exports.createPost = async (req, res) => {
       const user = await User.findById(req.user._id);
   
       
-      // here we are finding the posts of user which the current user is following and $in operator takes argument as array so it will return array
+      // here we are finding the posts of user which the current user is following and $in operator takes argument as array so it will return array ($in operator selects the documents whose field holds an array that contains at least one element that matches a value in the specified array)
+      
       const posts = await Post.find({
         owner: {
           $in: user.following,

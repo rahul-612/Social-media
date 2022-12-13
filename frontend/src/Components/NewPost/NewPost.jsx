@@ -1,16 +1,18 @@
-import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Button, Typography } from "@mui/material";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewPost } from "../../Actions/Post";
 import { loadUser } from "../../Actions/User";
 import "./NewPost.css";
+import InputEmoji from 'react-input-emoji'
+
 const NewPost = () => {
   const [image, setImage] = useState(null);
-  const [caption, setCaption] = useState("");
+  // const [caption, setCaption] = useState("");
+  const [ caption, setCaption ] = useState('')
 
   const { loading, error, message } = useSelector((state) => state.like);
-  
 
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -29,6 +31,7 @@ const NewPost = () => {
     };
   };
 
+  
   const submitHandler = async (e) => {
     
     e.preventDefault();
@@ -55,11 +58,18 @@ const NewPost = () => {
 
         {image && <img src={image} alt="post" />}
         <input type="file" accept="image/*" onChange={handleImageChange} />
-        <input
+        {/* <input
           type="text"
           placeholder="Caption..."
           value={caption}
-          onChange={(e) => setCaption(e.target.value)}
+          onChange={(e)=>setCaption(e.target.value)}
+        /> */}
+        <InputEmoji
+          value={caption}
+          onChange={setCaption}
+          cleanOnEnter
+          onEnter
+          placeholder="Type a message"
         />
         <Button disabled={loading} type="submit">
           Post

@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const Post = require("../models/Post");
 const {sendEmail}=require("../middlewares/sendEmail");
-const crypto =require("crypto");
+const crypto =require("crypto");      //can be used for encrypting, decrypting, or hashing any type of data.
 const cloudinary=require("cloudinary");
 
 
@@ -57,7 +57,9 @@ exports.login = async (req, res) => {
         const { email, password } = req.body;
   
         const user = await User.findOne({ email })
-            .select("+password").populate("posts followers following")
+            .select("+password").populate("posts followers following")  //using populate() we are actually merging the user collection with post collection mtlb ki user schema bnate wkt jo humne post ki field me reference post ka diya ha waha hum jo bhi is user ki post hogi us post ki id user collection me store kr rhe h! aur hum wohi properties populate kr skte h jo ki reference propeties hoti h!
+
+            //yani ye RDBMS k join jaisa hota ha
 
 
         if (!user) {
@@ -137,7 +139,7 @@ exports.followUser = async (req, res) => {
         const indexfollowing = loggedInUser.following.indexOf(userToFollow._id);
         const indexfollowers = userToFollow.followers.indexOf(loggedInUser._id);
   
-        loggedInUser.following.splice(indexfollowing, 1);
+        loggedInUser.following.splice(indexfollowing, 1); //deleting 
         userToFollow.followers.splice(indexfollowers, 1);
   
         await loggedInUser.save();
@@ -148,6 +150,7 @@ exports.followUser = async (req, res) => {
           message: "User Unfollowed",
         });
       } else {
+        // yeha hum user collection me following field me un user ki id store kr rhe h jisko follow kra ha aur followers field me unko store kr rhe h jinhone hume follow kra ha
         loggedInUser.following.push(userToFollow._id);
         userToFollow.followers.push(loggedInUser._id);
   
@@ -446,7 +449,7 @@ exports.followUser = async (req, res) => {
 
   exports.resetPassword = async (req, res) => {
     try {
-      const resetPasswordToken = crypto
+      const resetPasswordToken = crypto       //crypto built-in module can be used for encrypting, decrypting, or hashing any type of data.
         .createHash("sha256")
         .update(req.params.token)
         .digest("hex");

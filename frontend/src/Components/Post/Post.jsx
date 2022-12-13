@@ -18,14 +18,13 @@ import {
   updatePost,
 } from "../../Actions/Post";
 import { getFollowingPosts, getMyPosts, loadUser,getUserPosts } from "../../Actions/User";
-
 import User from "../User/User";
 import CommentCard from "../CommentCard/CommentCard";
 
 const Post = ({postId,caption,postImage,likes = [],comments = [],ownerImage,ownerName,ownerId,isDelete = false,isAccount = false}) => {
   const [liked, setLiked] = useState(false);
   const [likesUser, setLikesUser] = useState(false);
-  const [commentValue, setCommentValue] = useState("");
+  const [commentValue, setCommentValue] = useState('');
   const [commentToggle, setCommentToggle] = useState(false);
   const [captionValue, setCaptionValue] = useState(caption);
   const [captionToggle, setCaptionToggle] = useState(false);
@@ -175,6 +174,7 @@ const Post = ({postId,caption,postImage,likes = [],comments = [],ownerImage,owne
               placeholder="Comment Here..."
               required
             />
+       
 
             <Button type="submit" variant="contained">
               Add

@@ -18,6 +18,8 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.5",
-    "nodemailer": "^6.7.2"
-  }
+    "nodemailer": "^6.7.2",
+    "react-input-emoji": "^4.0.9"
+  },
+  "proxy":"http://localhost:4000"
 }
