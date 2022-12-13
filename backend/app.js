@@ -3,9 +3,10 @@ const cookieParser=require("cookie-parser");
 const app=express();
 const path=require("path")
 
-if(process.env.NODE_ENV!=="production"){
+// if(process.env.NODE_ENV!=="production"){
+// require("dotenv").config({path:"backend/config/config.env"})
+// }
 require("dotenv").config({path:"backend/config/config.env"})
-}
 
 // Using Middlewares
 app.use(express.json({limit:'50mb'}));
